@@ -90,13 +90,17 @@
 			{%  block extrafooter %}
 
 				<script>
-					$(document).ready(function () {
-                    if ($('#publicado').prop('checked')) {
-                    $("#data").show();
-                    } else {
-                    $("#data").hide();
-                    }
-                    });
+					
+              $("#data").css('display', 'none');
+               
+$('#publicado').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#data').css('display', 'block');
+    }
+    else {
+        $("#data").css('display', 'none');
+    }
+});
 
                     $('#datetimepicker1').datetimepicker();
 				</script>
