@@ -63,9 +63,11 @@
 												</div>
 
 											</div>
-
+												{% if noticia.publicado == 'SIM' %}
 											<div class="row" id="data">
-
+												{% else %}
+											<div class="row" id="data" style="display:none">
+												{% endif %}
 												<div class="form-group col-sm-12">
 													<label for="data-pagamento">Data da publicação</label>
 													<div class="input-group date" id="datetimepicker1">
@@ -104,10 +106,7 @@
 			{%  block extrafooter %}
 
 				<script>
-				
-
-                  $("#data").css('display', 'none');
-               
+   
 $('#publicado').on('change', function () {
     if ($(this).is(':checked')) {
         $('#data').css('display', 'block');

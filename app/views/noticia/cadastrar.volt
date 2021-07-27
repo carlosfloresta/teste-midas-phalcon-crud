@@ -49,7 +49,7 @@
 
 											</div>
 
-											<div class="row" id="data">
+											<div class="row" id="data" style="display:none">
 
 												<div class="form-group col-sm-12">
 													<label for="data-pagamento">Data da publicação</label>
@@ -90,9 +90,7 @@
 			{%  block extrafooter %}
 
 				<script>
-					
-              $("#data").css('display', 'none');
-               
+    
 $('#publicado').on('change', function () {
     if ($(this).is(':checked')) {
         $('#data').css('display', 'block');
