@@ -57,7 +57,7 @@ class NoticiaForm extends Form
         $this->add($publicado);
 
         //data
-        $this->add(new Text('data', array("class" => "form-control")));
+        $this->add(new Text('data', array("class" => "form-control","id" => "data2")));
 
     }
 }

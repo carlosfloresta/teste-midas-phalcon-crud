@@ -83,7 +83,7 @@ a:7:{i:0;s:910:"<!DOCTYPE html>
 
             <?= $this->flash->output(true) ?>
 
-            ";s:7:"content";N;i:2;s:1139:"
+            ";s:7:"content";N;i:2;s:1159:"
 
             <div class="col-md-12 text-center">
                 <p>Copyright 2015 - Todos os Direitos reservados. <a href="http://www.siteparaimobiliaria.imb.br/" target="_blank">Site para imobiliária Midas</a></p>
@@ -99,9 +99,13 @@ a:7:{i:0;s:910:"<!DOCTYPE html>
 
         <script src="<?= $this->url->getStatic('js/jquery.validate.min.js') ?>"></script>
         <script src="<?= $this->url->getStatic('js/langs/messages_pt_PT.min.js') ?>"></script>
+         
 
 
         <script src="<?= $this->url->getStatic('js/bootstrap-datetimepicker.min.js') ?>"></script>
+
+
+       
 
         <script>
             $(document).ready(function(){

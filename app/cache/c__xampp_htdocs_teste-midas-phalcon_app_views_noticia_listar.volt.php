@@ -164,9 +164,13 @@
 
         <script src="<?= $this->url->getStatic('js/jquery.validate.min.js') ?>"></script>
         <script src="<?= $this->url->getStatic('js/langs/messages_pt_PT.min.js') ?>"></script>
+         
 
 
         <script src="<?= $this->url->getStatic('js/bootstrap-datetimepicker.min.js') ?>"></script>
+
+
+       
 
         <script>
             $(document).ready(function(){

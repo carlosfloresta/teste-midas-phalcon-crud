@@ -99,9 +99,13 @@
 
         <script src="{{ static_url("js/jquery.validate.min.js") }}"></script>
         <script src="{{ static_url("js/langs/messages_pt_PT.min.js") }}"></script>
+         
 
 
         <script src="{{ static_url("js/bootstrap-datetimepicker.min.js") }}"></script>
+
+
+       
 
         <script>
             $(document).ready(function(){

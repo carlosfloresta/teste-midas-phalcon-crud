@@ -63,65 +63,64 @@
 												</div>
 
 											</div>
-												{% if noticia.publicado == 'SIM' %}
-											<div class="row" id="data">
+											{% if noticia.publicado == 'SIM' %}
+												<div class="row" id="data">
 												{% else %}
-											<div class="row" id="data" style="display:none">
-												{% endif %}
-												<div class="form-group col-sm-12">
-													<label for="data-pagamento">Data da publicação</label>
-													<div class="input-group date" id="datetimepicker1">
-														{{ form.render('data') }}
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
+													<div class="row" id="data" style="display:none">
+													{% endif %}
+													<div class="form-group col-sm-12">
+														<label for="data-pagamento">Data da publicação</label>
+														<div class="input-group date" id="datetimepicker1">
+															{{ form.render('data',['value':date("d-m-Y H:i:s", strtotime(noticia.dataP))]) }}
+															<span class="input-group-addon">
+																<span class="glyphicon glyphicon-calendar"></span>
+															</span>
+														</div>
 													</div>
-												</div>
 
+												</div>
+											</div>
+											{#/.panel-body#}
+										</div>
+										{#/.panel#}
+										<div class="row" style="text-align:right;">
+											<div id="buttons-cadastro" class="col-md-12">
+												<a href="{{ url(['for':'noticia.lista']) }}" class="btn btn-default">Cancelar</a>
+												{{ submit_button('Gravar', "class": 'btn btn-primary') }}
 											</div>
 										</div>
-										{#/.panel-body#}
 									</div>
-									{#/.panel#}
-									<div class="row" style="text-align:right;">
-										<div id="buttons-cadastro" class="col-md-12">
-											<a href="{{ url(['for':'noticia.lista']) }}" class="btn btn-default">Cancelar</a>
-											{{ submit_button('Gravar', "class": 'btn btn-primary') }}
-										</div>
-									</div>
+									{#/.conteudo#}
 								</div>
-								{#/.conteudo#}
+								{#/.panel-body#}
+								{{ end_form() }}
 							</div>
-							{#/.panel-body#}
-							{{ end_form() }}
+							{#/.panel#}
 						</div>
-						{#/.panel#}
+						{#/.col-md-12#}
 					</div>
-					{#/.col-md-12#}
-				</div>
-				<!-- row -->
+					<!-- row -->
 
-			{% endblock %}
+				{% endblock %}
 
-			{%  block extrafooter %}
+				{%  block extrafooter %}
 
-				<script>
-   
-$('#publicado').on('change', function () {
-    if ($(this).is(':checked')) {
-        $('#data').css('display', 'block');
-    }
-    else {
-        $("#data").css('display', 'none');
-    }
+					<script>
+
+						$('#publicado').on('change', function () {
+if ($(this).is(':checked')) {
+$('#data').css('display', 'block');
+} else {
+$("#data").css('display', 'none');
+$('#data2').datetimepicker('hide');
+}
 });
 
-                    $('#datetimepicker1').datetimepicker();
+ $('#data2').datetimepicker({
+format: "dd-MM-yyyy hh:mm:ss",
+language: "pt-BR",
+orientation: 'auto',
+});
+					</script>
 
-
-                
-
-
-				</script>
-
-			{% endblock %}
+				{% endblock %}

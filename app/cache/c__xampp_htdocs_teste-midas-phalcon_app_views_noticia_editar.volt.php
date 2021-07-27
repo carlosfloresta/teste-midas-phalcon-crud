@@ -146,45 +146,45 @@
 												</div>
 
 											</div>
-												<?php if ($noticia->publicado == 'SIM') { ?>
-											<div class="row" id="data">
+											<?php if ($noticia->publicado == 'SIM') { ?>
+												<div class="row" id="data">
 												<?php } else { ?>
-											<div class="row" id="data" style="display:none">
-												<?php } ?>
-												<div class="form-group col-sm-12">
-													<label for="data-pagamento">Data da publicação</label>
-													<div class="input-group date" id="datetimepicker1">
-														<?= $form->render('data') ?>
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
+													<div class="row" id="data" style="display:none">
+													<?php } ?>
+													<div class="form-group col-sm-12">
+														<label for="data-pagamento">Data da publicação</label>
+														<div class="input-group date" id="datetimepicker1">
+															<?= $form->render('data', ['value' => date('d-m-Y H:i:s', strtotime($noticia->dataP))]) ?>
+															<span class="input-group-addon">
+																<span class="glyphicon glyphicon-calendar"></span>
+															</span>
+														</div>
 													</div>
-												</div>
 
+												</div>
 											</div>
+											
 										</div>
 										
-									</div>
-									
-									<div class="row" style="text-align:right;">
-										<div id="buttons-cadastro" class="col-md-12">
-											<a href="<?= $this->url->get(['for' => 'noticia.lista']) ?>" class="btn btn-default">Cancelar</a>
-											<?= $this->tag->submitButton(['Gravar', 'class' => 'btn btn-primary']) ?>
+										<div class="row" style="text-align:right;">
+											<div id="buttons-cadastro" class="col-md-12">
+												<a href="<?= $this->url->get(['for' => 'noticia.lista']) ?>" class="btn btn-default">Cancelar</a>
+												<?= $this->tag->submitButton(['Gravar', 'class' => 'btn btn-primary']) ?>
+											</div>
 										</div>
 									</div>
+									
 								</div>
 								
+								<?= $this->tag->endForm() ?>
 							</div>
 							
-							<?= $this->tag->endForm() ?>
 						</div>
 						
 					</div>
-					
-				</div>
-				<!-- row -->
+					<!-- row -->
 
-			
+				
 
             <div class="col-md-12 text-center">
                 <p>Copyright 2015 - Todos os Direitos reservados. <a href="http://www.siteparaimobiliaria.imb.br/" target="_blank">Site para imobiliária Midas</a></p>
@@ -200,9 +200,13 @@
 
         <script src="<?= $this->url->getStatic('js/jquery.validate.min.js') ?>"></script>
         <script src="<?= $this->url->getStatic('js/langs/messages_pt_PT.min.js') ?>"></script>
+         
 
 
         <script src="<?= $this->url->getStatic('js/bootstrap-datetimepicker.min.js') ?>"></script>
+
+
+       
 
         <script>
             $(document).ready(function(){
@@ -214,26 +218,25 @@
         </script>
 		
 
-				<script>
-   
-$('#publicado').on('change', function () {
-    if ($(this).is(':checked')) {
-        $('#data').css('display', 'block');
-    }
-    else {
-        $("#data").css('display', 'none');
-    }
+					<script>
+
+						$('#publicado').on('change', function () {
+if ($(this).is(':checked')) {
+$('#data').css('display', 'block');
+} else {
+$("#data").css('display', 'none');
+$('#data2').datetimepicker('hide');
+}
 });
 
-                    $('#datetimepicker1').datetimepicker();
+ $('#data2').datetimepicker({
+format: "dd-MM-yyyy hh:mm:ss",
+language: "pt-BR",
+orientation: 'auto',
+});
+					</script>
 
-
-                
-
-
-				</script>
-
-			
+				
 
 	</body>
 </html>

@@ -52,7 +52,7 @@ class NoticiaController extends ControllerBase
 
         $noticias = Noticia::findFirstById($id);
 
-        /*    var_dump($publicado);
+        /*     var_dump($this->request->getPost('data'));
         die();   */
 
         $form = new NoticiaForm();
@@ -61,6 +61,8 @@ class NoticiaController extends ControllerBase
         if ($publicado == 1) {
             $publicado = 'SIM';
             $data_pub = $this->request->getPost('data');
+
+            $data_pub =  date("Y-m-d H:i:s", strtotime($data_pub));
         } else {
             $publicado = 'NÃO';
             $data_pub = null;

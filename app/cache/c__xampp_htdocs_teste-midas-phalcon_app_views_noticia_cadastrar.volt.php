@@ -136,7 +136,7 @@
 
 												<div class="form-group col-sm-12">
 													<label for="data-pagamento">Data da publicação</label>
-														<div class="input-group date" id="datetimepicker1">
+													<div class="input-group date" id="datetimepicker1">
 														<?= $form->render('data') ?>
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-calendar"></span>
@@ -184,9 +184,13 @@
 
         <script src="<?= $this->url->getStatic('js/jquery.validate.min.js') ?>"></script>
         <script src="<?= $this->url->getStatic('js/langs/messages_pt_PT.min.js') ?>"></script>
+         
 
 
         <script src="<?= $this->url->getStatic('js/bootstrap-datetimepicker.min.js') ?>"></script>
+
+
+       
 
         <script>
             $(document).ready(function(){
@@ -199,17 +203,23 @@
 		
 
 				<script>
-    
-$('#publicado').on('change', function () {
-    if ($(this).is(':checked')) {
-        $('#data').css('display', 'block');
-    }
-    else {
-        $("#data").css('display', 'none');
-    }
+
+					$('#publicado').on('change', function () {
+if ($(this).is(':checked')) {
+$('#data').css('display', 'block');
+} else {
+$("#data").css('display', 'none');
+$('#data2').datetimepicker('hide');
+}
 });
 
-                    $('#datetimepicker1').datetimepicker();
+
+ $('#data2').datetimepicker({
+format: "dd-MM-yyyy hh:mm:ss",
+language: "pt-BR",
+orientation: 'auto',
+});
+
 				</script>
 
 			
