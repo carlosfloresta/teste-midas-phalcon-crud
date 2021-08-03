@@ -44,66 +44,62 @@ class NoticiaController extends ControllerBase
     public function salvarAction()
     {
         date_default_timezone_set('America/Sao_Paulo');
+        $form = new NoticiaForm();
+
         $titulo = $this->request->getPost('titulo');
         $texto = $this->request->getPost('texto');
         $categoria = $this->request->getPost('categorias');
         $publicado = $this->request->getPost('publicado');
         $id = $this->request->getPost("id");
 
-        $noticias = Noticia::findFirstById($id);
-
-        /*     var_dump($this->request->getPost('data'));
-        die();   */
-
-        $form = new NoticiaForm();
-        $noticia = new Noticia();
-
         if ($publicado == 1) {
             $publicado = 'SIM';
             $data_pub = $this->request->getPost('data');
 
-            $data_pub =  date("Y-m-d H:i:s", strtotime($data_pub));
+            $data_pub = date("Y-m-d H:i:s", strtotime($data_pub));
         } else {
             $publicado = 'NÃO';
             $data_pub = null;
+        }
+
+        if ($id === null) {
+            $noticia = new Noticia();
+            $noticia->setDataCad(date('Y-m-d H:i:s'));
+        } else {
+            $noticia = Noticia::findFirstById($id);
+            $update = true;
         }
 
         $noticia->setTitulo($titulo);
         $noticia->setTexto($texto);
         $noticia->setCategoria(implode(",", $categoria));
         $noticia->setPublicado($publicado);
-        $noticia->setDataCad(date('Y-m-d H:i:s'));
         $noticia->setDataUlt(date('Y-m-d H:i:s'));
         $noticia->setDataP($data_pub);
 
         if ($this->request->isPost()) {
             if ($form->isValid($this->request->getPost())) {
 
-                if ($noticias) {
-                    //update
-                    $noticias->setTitulo($titulo);
-                    $noticias->setTexto($texto);
-                    $noticias->setCategoria(implode(",", $categoria));
-                    $noticias->setPublicado($publicado);
-                    $noticias->setDataP($data_pub);
-                    $noticias->setDataUlt(date('Y-m-d H:i:s'));
+                if ($noticia->save()) {
 
-                    if ($noticias->save()) {
+                    if ($update === true) {
                         $this->flash->success('Noticia atualizada com sucesso!');
                         return $this->response->redirect(array('for' => 'noticia.lista'));
                     } else {
-                        $this->flash->error('Erro ao atualizar noticia!');
-                        return $this->response->redirect(array('for' => 'noticia.editar'));
+                        $this->flash->success('Noticia cadastrada com sucesso!');
+                        return $this->response->redirect(array('for' => 'noticia.lista'));
                     }
-                } elseif ($noticia->create()) {
-                    //create
-                    $this->flash->success('Noticia cadastrada com sucesso!');
-                    return $this->response->redirect(array('for' => 'noticia.lista'));
 
                 } else {
 
-                    $this->flash->error('Erro ao salvar noticia!');
-                    return $this->response->redirect(array('for' => 'noticia.cadastrar'));
+                    if ($update === true) {
+                        $this->flash->error('Erro ao atualizar noticia!');
+                        return $this->response->redirect(array('for' => 'noticia.editar'));
+                    } else {
+                        $this->flash->error('Erro ao salvar noticia!');
+                        return $this->response->redirect(array('for' => 'noticia.cadastrar'));
+                    }
+
                 }
 
             } else {
@@ -112,7 +108,7 @@ class NoticiaController extends ControllerBase
                     $this->flash->error($message);
                     $this->session->set('titulo', $titulo);
                     $this->session->set('texto', $texto);
-                    if ($noticias) {
+                    if ($update === true) {
                         return $this->response->redirect(array('for' => 'noticia.editar', 'id' => $id));
                     }
                     return $this->response->redirect(array('for' => 'noticia.cadastrar'));
